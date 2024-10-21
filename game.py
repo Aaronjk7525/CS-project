@@ -9,7 +9,7 @@ COLS =18
 
 WIDTH = TILE_SIZE*ROWS
 HEIGHT = TILE_SIZE*COLS
-TITLE="new game" 
+TITLE="One piece" 
 
 platforms=build("tile3.csv",TILE_SIZE)
 points=build("tile4.csv",TILE_SIZE)

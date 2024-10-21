@@ -13,9 +13,6 @@ TITLE="new game"
 
 platforms=build("tile3.csv",TILE_SIZE)
 points=build("tile4.csv",TILE_SIZE)
-obstacles=build("tile5.csv",TILE_SIZE)
-
-
 
 
 player= Actor("p_right")
@@ -27,25 +24,21 @@ player.alive = True
 gravity = 1
 jump_velocity = -10
 over = False
-WIN = 0
+WIN = False
 
 def draw():
+    global WIN,over
     screen.clear() # type: ignore
     screen.fill("skyblue") # type: ignore
     for platform in platforms:
         platform.draw()
-    for obstacle in obstacles:
-        obstacle.draw()
     for point in points:
         point.draw()
     
     if player.alive:
         player.draw()
     #display
-    if over==True and WIN!=0:
-        screen.draw.text("!!!GAME OVER!!!",center=(WIDTH/2,HEIGHT/2)) # type: ignore
-        screen.draw.text("!!!U have lost!!!",center=(WIDTH/3,HEIGHT/3)) # type: ignore
-    if over==True and WIN==-1:
+    if over==True and WIN==True:
         screen.draw.text("!!!GAME OVER!!!",center=(WIDTH/2,HEIGHT/2)) # type: ignore
     
 
@@ -88,13 +81,7 @@ def update():
         if player.colliderect(point)>0:
             points.remove(point)
     if len(points)==0:
-        WIN-=1
-    
-    for obstacle in obstacles:
-        if player.colliderect(obstacle):
-            over=True
-            WIN+=1
-        
+        WIN = True
 
  
 def on_key_down(key):
